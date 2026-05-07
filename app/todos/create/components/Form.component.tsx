@@ -2,9 +2,18 @@
 
 interface FormProps {
   addTodo: (formData: FormData) => Promise<void>;
+  initialValues?: {
+    titulo?: string;
+    descricao?: string | null;
+  };
+  submitLabel?: string;
 }
 
-export default function Form({ addTodo }: FormProps) {
+export default function Form({
+  addTodo,
+  initialValues,
+  submitLabel = "Criar Tarefa",
+}: FormProps) {
   return (
     <form 
       action={addTodo} 
@@ -22,6 +31,7 @@ export default function Form({ addTodo }: FormProps) {
           id="titulo"
           name="titulo"
           required
+          defaultValue={initialValues?.titulo || ""}
           placeholder="Ex: Finalizar relatório"
           className="w-full rounded-xl border border-zinc-800 bg-zinc-800 px-4 py-3 text-zinc-100 placeholder-zinc-500 shadow-sm transition-all focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
         />
@@ -37,7 +47,7 @@ export default function Form({ addTodo }: FormProps) {
         <textarea
           id="descricao"
           name="descricao"
-          required
+          defaultValue={initialValues?.descricao || ""}
           placeholder="Descreva os detalhes da tarefa..."
           className="w-full h-32 rounded-xl border border-zinc-800 bg-zinc-800 px-4 py-3 text-zinc-100 placeholder-zinc-500 shadow-sm transition-all focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 resize-none"
         />
@@ -47,7 +57,7 @@ export default function Form({ addTodo }: FormProps) {
         type="submit"
         className="mt-2 w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-500 active:scale-[0.98]"
       >
-        Criar Tarefa
+        {submitLabel}
       </button>
 
       <button 
