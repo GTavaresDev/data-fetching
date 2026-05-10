@@ -1,9 +1,11 @@
 import { db } from "@/db";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import Voltar from "@/app/components/Voltar.component";
 
 export default async function TodoPage(props: PageProps<"/todos/[id]">) {
   const { id } = await props.params;
+
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const todo = await db.todo.findFirst({
     where: { id: Number(id) },
@@ -16,12 +18,7 @@ export default async function TodoPage(props: PageProps<"/todos/[id]">) {
   return (
     <main className="min-h-screen bg-zinc-950 px-4 py-10 text-zinc-100">
       <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
-        <Link
-          href="/"
-          className="text-sm text-zinc-400 transition-colors hover:text-zinc-100"
-        >
-          ← Voltar para a lista
-        </Link>
+        <Voltar />
 
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-xl">
           <div className="border-b border-zinc-800 pb-6">

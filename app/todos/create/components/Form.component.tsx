@@ -1,7 +1,7 @@
 "use client";
 
 interface FormProps {
-  addTodo: (formData: FormData) => Promise<void>;
+  action: (formData: FormData) => Promise<void>;
   initialValues?: {
     titulo?: string;
     descricao?: string | null;
@@ -10,18 +10,18 @@ interface FormProps {
 }
 
 export default function Form({
-  addTodo,
+  action,
   initialValues,
   submitLabel = "Criar Tarefa",
 }: FormProps) {
   return (
-    <form 
-      action={addTodo} 
+    <form
+      action={action}
       className="flex w-full max-w-md flex-col gap-5 rounded-2xl bg-zinc-900 p-6 border border-zinc-800 shadow-xl"
     >
       <div className="flex flex-col gap-2">
-        <label 
-          htmlFor="titulo" 
+        <label
+          htmlFor="titulo"
           className="text-sm font-semibold text-zinc-400 ml-1"
         >
           Título
@@ -38,8 +38,8 @@ export default function Form({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label 
-          htmlFor="descricao" 
+        <label
+          htmlFor="descricao"
           className="text-sm font-semibold text-zinc-400 ml-1"
         >
           Descrição
@@ -60,7 +60,7 @@ export default function Form({
         {submitLabel}
       </button>
 
-      <button 
+      <button
         type="reset"
         className="text-center text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
       >
