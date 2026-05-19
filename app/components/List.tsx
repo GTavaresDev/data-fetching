@@ -2,9 +2,12 @@ import Link from "next/link";
 import Button from "./Button";
 import { deleteDeleteTodo } from "../hooks/useDeleteTodo";
 import { viewTodo } from "../hooks/useViewTodo";
+import ToggleTodoStatus from "./toggle";
+import Checkbox from "./toggle/checkbox";
 
 type Todo = {
   id: number;
+  status: string;
   titulo: string;
   descricao: string | null;
 };
@@ -27,9 +30,15 @@ export default function List({ todos }: { todos: Todo[] }) {
               </span>
             </div>
 
+            <div>{todo.status}</div>
+
             <p className="text-zinc-400 leading-relaxed text-sm">
               {todo.descricao || "Sem descricao informada."}
             </p>
+
+            <div>
+              <ToggleTodoStatus todo={todo} />
+            </div>
 
             <div className="mt-5 flex flex-wrap gap-2 border-t border-zinc-800 pt-4">
               <Button

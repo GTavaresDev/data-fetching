@@ -8,6 +8,7 @@ import {
   validateTodoForm,
 } from "@/app/todos/shared/todoFormState";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function addTodo(
   _prevState: TodoFormState,
@@ -44,5 +45,6 @@ export async function addTodo(
     );
   }
 
+  revalidatePath("/");
   redirect("/");
 }

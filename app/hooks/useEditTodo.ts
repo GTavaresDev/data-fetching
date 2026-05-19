@@ -8,6 +8,7 @@ import {
   validateTodoForm,
 } from "@/app/todos/shared/todoFormState";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function getTodoForEdit(id: number) {
   const todo = await db.todo.findFirst({
@@ -58,5 +59,6 @@ export async function updateTodo(
     );
   }
 
+  revalidatePath("/");
   redirect("/");
 }

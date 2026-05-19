@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/db";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function deleteDeleteTodo(formData: FormData) {
@@ -8,5 +9,7 @@ export async function deleteDeleteTodo(formData: FormData) {
   await db.todo.delete({
     where: { id: todoId },
   });
+
+  revalidatePath("/");
   redirect("/");
 }
